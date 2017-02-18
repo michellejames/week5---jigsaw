@@ -1,0 +1,75 @@
+/* 
+==============================================
+CONTENT:	Project Name Here
+AUTHOR:		Your Name Here
+==============================================
+
+TABLE OF CONTENTS:
+
+1. Main Layout
+2. Content
+
+==============================================
+*/
+/* 1. Main Layout ================================= */
+/** {
+  box-sizing: border-box; }
+*/
+body {
+  margin: 0;
+  background-color: #eee;
+}
+
+#frame {
+  width: 600px;
+  height: 400px;
+  margin-top: 98px;
+  margin-left: 98px;
+  border: 2px solid black;
+  background-color: white;
+}
+
+.piece {
+  position: absolute;
+}
+
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: .5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.module {
+    width: 40%;
+    height: 60%;
+    background: white;
+    opacity: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.winningMessage {
+    color: black;
+    opacity: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    text-align: center;
+}
+
+.resetButton {
+    opacity: 1;
+    top: 70%;
+    left: 42%;
+    transform: translate(-50%, -50%);
+    
+}

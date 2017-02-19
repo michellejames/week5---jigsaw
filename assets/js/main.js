@@ -162,29 +162,43 @@ var rotatePiece = function ( e ) {
 		//a = keyCode 65
 		//d = keyCode 68
 
-		if (e.keyCode == 65) {
-			//rotate left
-			pieceBeingDragged.style.transform = "rotate(90deg)";
-		} else if (e.keyCode == 68) {
-			//rotate right
-			pieceBeingDragged.style.transform = "rotate(180deg)";
+        if (e.keyCode == 65) {
+            //rotate left
+            pieceBeingDragged.dataset.rotation = parseInt(pieceBeingDragged.dataset.rotation) - 90;  
+            pieceBeingDragged.style.transform = "rotate(" + pieceBeingDragged.dataset.rotation +"deg)";
+
+            if (pieceBeingDragged.dataset.rotation < 0) {
+            	pieceBeingDragged.dataset.rotation = 360;
+            }
+            
+        } else if (e.keyCode == 68) {
+        	//rotate right
+        	pieceBeingDragged.dataset.rotation = parseInt(pieceBeingDragged.dataset.rotation) + 90;  
+            pieceBeingDragged.style.transform = "rotate(" + pieceBeingDragged.dataset.rotation +"deg)";
+
+            if (pieceBeingDragged.dataset.rotation > 270) {
+            	pieceBeingDragged.dataset.rotation = 0;
+            }
 		}
 	}
 }
 
 
 var checkForFit = function ( lastDraggedPiece ) {
-	console.dir ( lastDraggedPiece );
+
 	var currentLeft = parseInt ( lastDraggedPiece.style.left );
 	var currentTop = parseInt ( lastDraggedPiece.style.top );
 	var finalLeft = parseInt ( lastDraggedPiece.dataset.finalX );
 	var finalTop = parseInt ( lastDraggedPiece.dataset.finalY );
+	// var finalRotation = pieceBeingDragged.style.transform = "rotate(0deg)";
 
 	if ( currentLeft <= finalLeft + 20 &&
 		currentLeft >= finalLeft - 20 &&
 		currentTop <= finalTop + 20 &&
-		currentTop >= finalTop - 20 ) {
-		// console.log("in place");
+		currentTop >= finalTop - 20 
+		// && finalRotation = 0
+		) {
+
 		lastDraggedPiece.style.left = finalLeft + "px";
 		lastDraggedPiece.style.top = finalTop + "px";
 
@@ -298,15 +312,17 @@ var resetGame = function () {
 
 	var overlay = document.querySelector( ".overlay" );
 	var module = document.querySelector( ".module" );
-	
+	var piecesLocked = document.querySelectorAll (".locked");
+
 	overlay.parentNode.removeChild( overlay );
 	module.parentNode.removeChild( module );
 
+	for (var i = piecesLocked.length-1; i>=0; i--) {	
+		piecesLocked[i].parentNode.removeChild(piecesLocked[i]);
+	}
+
 	var imgArray = document.querySelectorAll( "imgDefaultData" );
 
-	// for ( var i = cards.length - 1; i >= 0; i-- ) {
-	// 	cards[i].parentNode.removeChild ( cards [i] );
-	// }
 	intervalstopWatch = setInterval(addTime, 1000);
 	startGame ();
 

@@ -68,8 +68,9 @@ body {
 
 .resetButton {
     opacity: 1;
+    position: absolute;
     top: 70%;
-    left: 42%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    
+
 }

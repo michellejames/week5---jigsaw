@@ -40,65 +40,12 @@ console.log("Hello World from main.js!");
 //When game ends, display modal with timer and reset button
 //Reset game on reset button click
 //Bonus: add in rotating
-var intervalStopWatch = 0;
 
-////////////////TIMER//////////////
-
-var seconds = 0;
-var minutes = 0;
-var hours = 0;
-
-
-var stopWatch = document.createElement ( "h1" );
-stopWatch.classList.add ( "timer" );
-document.body.appendChild ( stopWatch );
-
-
-var addTime = function () {
-    seconds++;
-    stopWatch.innerHTML = ( hoursValue () + hours + ":" + minutesValue () + minutes + ":" + secondsValue () + seconds );
-
-    if ( seconds >= 60 ) {
-        minutes++;
-        seconds = 0;
-    }
-    if ( minutes >= 60 ) {
-        hours++;
-        minutes = 0;
-        seconds = 0;
-    }
-}
-
-intervalStopWatch = setInterval ( addTime, 1000 );
-
-function secondsValue () {
-    if ( seconds < 10 ) {
-        return "0";
-    } else {
-        return "";
-    }
-}
-
-function minutesValue () {
-    if ( minutes < 10 ) {
-        return "0";
-    } else {
-        return "";
-    }
-}
-
-function hoursValue () {
-    if ( hours < 10 ) {
-        return "0";
-    } else {
-        return "";
-    }
-}
 
 var createImgObj = function ( imgData ) {
 	var imgObj = [];
 
-	//set up variables to handle keeping track of x and y positions and which column we're in
+	//set up variables to handle keeping track of x and y positions and which coumn we're in
 	var positionX = 100;
 	var positionY = 100;
 	var columnCount = 1;
@@ -132,10 +79,6 @@ console.log ( imgObj );
 
 var startGame = function () {
 
-seconds = 0;
-minutes = 0;
-hours = 0;
-
 var startMessage = document.createElement ( "h1" );
 	startMessage.classList.add ( "startMessage" );
 	document.body.appendChild ( startMessage );
@@ -143,6 +86,10 @@ var startMessage = document.createElement ( "h1" );
 
 
 startMessage = document.querySelector ( ".startMessage" );
+
+seconds = 0;
+minutes = 0;
+hours = 0;
 
 	//path to images
 	//Extension of images
@@ -164,6 +111,7 @@ startMessage = document.querySelector ( ".startMessage" );
 	window.addEventListener ( "mousemove", movePiece );
 	window.addEventListener ( "mouseup", stopDrag );
 	window.addEventListener ( "keyup", rotatePiece );
+
 }
 
 var placePieces = function ( imgArray ) {
@@ -208,6 +156,7 @@ var movePiece = function ( e ) {
 		pieceBeingDragged.style.top = pieceBeginTop + distanceTop + "px";
 	
 	}
+
 }
 
 var stopDrag = function ( e ) {
@@ -220,26 +169,26 @@ var stopDrag = function ( e ) {
 
 var rotatePiece = function ( e ) {
 
-	if ( pieceBeingDragged ) {
-		e.preventDefault (); 		//doesn't stop window from horizontal scrolling with arrow buttons, so we fall back on a & d as backup
+	if (pieceBeingDragged) {
+		e.preventDefault(); 		//doesn't stop window from horizontal scrolling with arrow buttons, so we fall back on a & d as backup
 		//a = keyCode 65
 		//d = keyCode 68
 
-        if ( e.keyCode == 65 ) {
+        if (e.keyCode == 65) {
             //rotate left
-            pieceBeingDragged.dataset.rotation = parseInt ( pieceBeingDragged.dataset.rotation ) - 90;  
-            pieceBeingDragged.style.transform = "rotate ( " + pieceBeingDragged.dataset.rotation + "deg )";
+            pieceBeingDragged.dataset.rotation = parseInt(pieceBeingDragged.dataset.rotation) - 90;  
+            pieceBeingDragged.style.transform = "rotate(" + pieceBeingDragged.dataset.rotation +"deg)";
 
-            if ( pieceBeingDragged.dataset.rotation < 0 ) {
+            if (pieceBeingDragged.dataset.rotation < 0) {
             	pieceBeingDragged.dataset.rotation = 360;
             }
             
-        } else if ( e.keyCode == 68 ) {
+        } else if (e.keyCode == 68) {
         	//rotate right
-            pieceBeingDragged.dataset.rotation = parseInt ( pieceBeingDragged.dataset.rotation ) + 90;  
-            pieceBeingDragged.style.transform = "rotate ( " + pieceBeingDragged.dataset.rotation + "deg )";
-        	
-        	if ( pieceBeingDragged.dataset.rotation > 270 ) {
+        	pieceBeingDragged.dataset.rotation = parseInt(pieceBeingDragged.dataset.rotation) + 90;  
+            pieceBeingDragged.style.transform = "rotate(" + pieceBeingDragged.dataset.rotation +"deg)";
+
+            if (pieceBeingDragged.dataset.rotation > 270) {
             	pieceBeingDragged.dataset.rotation = 0;
             }
 		}
@@ -255,11 +204,12 @@ var checkForFit = function ( lastDraggedPiece ) {
 	var finalTop = parseInt ( lastDraggedPiece.dataset.finalY );
 	var finalRotation = parseInt(pieceBeingDragged.dataset.rotation);
 
+
 	if ( currentLeft <= finalLeft + 20 &&
 		currentLeft >= finalLeft - 20 &&
 		currentTop <= finalTop + 20 &&
 		currentTop >= finalTop - 20 &&
-		 !parseInt ( pieceBeingDragged.dataset.rotation )) {
+		!parseInt ( pieceBeingDragged.dataset.rotation )) {
 
 		lastDraggedPiece.style.left = finalLeft + "px";
 		lastDraggedPiece.style.top = finalTop + "px";
@@ -287,6 +237,59 @@ startGame();
 
 
 
+////////////////TIMER//////////////
+
+
+var seconds = 0;
+var minutes = 0;
+var hours = 0;
+
+var stopWatch = document.createElement ( "h1" );
+stopWatch.classList.add ( "timer" );
+document.body.appendChild ( stopWatch );
+
+
+var addTime = function () {
+    seconds++;
+    stopWatch.innerHTML = ( hoursValue () + hours + ":" + minutesValue () + minutes + ":" + secondsValue () + seconds );
+
+    if ( seconds >= 60 ) {
+        minutes++;
+        seconds = 0;
+    }
+    if ( minutes >= 60 ) {
+        hours++;
+        minutes = 0;
+        seconds = 0;
+    }
+}
+
+
+var intervalStopWatch = setInterval ( addTime, 1000 );
+
+function secondsValue () {
+    if ( seconds < 10 ) {
+        return "0";
+    } else {
+        return "";
+    }
+}
+
+function minutesValue () {
+    if ( minutes < 10 ) {
+        return "0";
+    } else {
+        return "";
+    }
+}
+
+function hoursValue () {
+    if ( hours < 10 ) {
+        return "0";
+    } else {
+        return "";
+    }
+}
 
 ////////////////MODULE//////////////
 
@@ -298,16 +301,16 @@ var createModule = function () {
 	document.body.appendChild ( overlay );
 
 	var module = document.createElement ( "div" );
-	module.classList.add ( "module" );
+	module.classList.add( "module" );
 	document.body.appendChild ( module );
 
 	var winningMessage = document.createElement ( "h3" );
-	winningMessage.classList.add ( "winningMessage" );
+	winningMessage.classList.add( "winningMessage" );
 	module.appendChild ( winningMessage );
 	winningMessage.innerHTML = "Congratulations! It took you " + ( hoursValue () + hours + ":" + minutesValue () + minutes + ":" + secondsValue () + seconds ) + " to finish the game.";
 
 	var resetButton = document.createElement ( "button" );
-	resetButton.classList.add ( "resetButton" );
+	resetButton.classList.add( "resetButton" );
 	module.appendChild ( resetButton );
 	resetButton.innerHTML = "Reset";
 
@@ -319,30 +322,23 @@ var createModule = function () {
 
 var resetGame = function () {
 
-	var overlay = document.querySelector ( ".overlay" );
-	var module = document.querySelector ( ".module" );
+	var overlay = document.querySelector( ".overlay" );
+	var module = document.querySelector( ".module" );
 	var piecesLocked = document.querySelectorAll (".locked");
 
-	overlay.parentNode.removeChild ( overlay );
-	module.parentNode.removeChild ( module );
+	overlay.parentNode.removeChild( overlay );
+	module.parentNode.removeChild( module );
 
-	for ( var i = piecesLocked.length - 1; i >= 0; i-- ) {	
-		piecesLocked[i].parentNode.removeChild ( piecesLocked[i] );
+	for (var i = piecesLocked.length-1; i>=0; i--) {	
+		piecesLocked[i].parentNode.removeChild(piecesLocked[i]);
 	}
 
-	var imgArray = document.querySelectorAll ( "imgDefaultData" );
+	var imgArray = document.querySelectorAll( "imgDefaultData" );
 
-	intervalStopWatch = setInterval ( addTime, 1000 );
-	startGame();
+	intervalstopWatch = setInterval(addTime, 1000);
+	startGame ();
+
 }
-
-
-
-
-
-
-
-
 
 
 

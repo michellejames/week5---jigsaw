@@ -139,7 +139,7 @@ hours = 0;
 var startMessage = document.createElement ( "h1" );
 	startMessage.classList.add ( "startMessage" );
 	document.body.appendChild ( startMessage );
-	startMessage.innerHTML = "Welcome! Finish the puzzle game by rotating the puzzle pieces into the right position.<br/>Use letter 'A' to rotate the piece left and 'D' to rotate the piece right.";
+	startMessage.innerHTML = "Welcome!<br />Finish the puzzle game by rotating the puzzle pieces into the right position.<br/>Use letter 'A' to rotate the piece left and 'D' to rotate the piece right.";
 
 
 startMessage = document.querySelector ( ".startMessage" );

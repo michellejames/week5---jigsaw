@@ -82,7 +82,7 @@ var startGame = function () {
 var startMessage = document.createElement ( "h1" );
 	startMessage.classList.add ( "startMessage" );
 	document.body.appendChild ( startMessage );
-	startMessage.innerHTML = "Welcome!<br />Finish the puzzle game by rotating the puzzle pieces into the right position.<br/>Use letter 'A' to rotate the piece left and 'D' to rotate the piece right.";
+	startMessage.innerHTML = "You again...<br><br>Finish the damn puzzle game and leave me along!<br>Press 'A' to rotate left, 'D' to rotate right.";
 
 
 startMessage = document.querySelector ( ".startMessage" );
@@ -307,7 +307,7 @@ var createModule = function () {
 	var winningMessage = document.createElement ( "h3" );
 	winningMessage.classList.add( "winningMessage" );
 	module.appendChild ( winningMessage );
-	winningMessage.innerHTML = "Congratulations! It took you " + ( hoursValue () + hours + ":" + minutesValue () + minutes + ":" + secondsValue () + seconds ) + " to finish the game.";
+	winningMessage.innerHTML = "Meh.<br><br>Took you " + ( hoursValue () + hours + ":" + minutesValue () + minutes + ":" + secondsValue () + seconds ) + " seconds too long.<br><br>";
 
 	var resetButton = document.createElement ( "button" );
 	resetButton.classList.add( "resetButton" );
